@@ -12,6 +12,5 @@
 	},
 	"editor.quickSuggestions": {
 		"strings": true
-	},
-	"eslint.codeActionsOnSave.rules": null
+	}
 }
