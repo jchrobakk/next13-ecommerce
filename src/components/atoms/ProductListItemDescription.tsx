@@ -14,7 +14,7 @@ export const ProductListItemDescription = ({
 	return (
 		<div className="grid grid-cols-5">
 			<div className="col-span-4">
-				<p className="font-semibold">{name}</p>
+				<h3 className="font-semibold">{name}</h3>
 				<p>{category}</p>
 			</div>
 			<div className="col-span-1">{formatPrice(price / 100)}</div>
