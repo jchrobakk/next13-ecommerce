@@ -14,7 +14,7 @@ export const ProductListItemCoverImage = ({ src, alt, size = 320 }: ProductListI
 				src={src}
 				width={size}
 				height={size}
-				className="w-full transition-transform hover:scale-105"
+				className="aspect-square w-full object-contain object-center transition-transform hover:scale-105"
 			/>
 		</div>
 	);
