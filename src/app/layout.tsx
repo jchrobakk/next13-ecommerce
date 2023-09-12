@@ -29,6 +29,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				</section>
 				<footer className="text-center">
 					<p>&copy; {new Date().getFullYear()} next13masters ecommerce</p>
+					<ul className="mx-auto flex max-w-2xl items-center justify-center gap-4 px-8 sm:px-6 lg:max-w-7xl">
+						<li>
+							<NavLink href="/faq">FAQ</NavLink>
+						</li>
+						<li>
+							<NavLink href="/tos">Terms of Service</NavLink>
+						</li>
+					</ul>
 				</footer>
 			</body>
 		</html>
