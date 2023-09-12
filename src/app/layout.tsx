@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { NavLink } from "@/components/atoms/NavLink";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,6 +14,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html lang="en">
 			<body className={inter.className}>
+				<nav>
+					<ul className="mx-auto flex max-w-2xl items-center justify-center gap-4 px-8 py-4 sm:px-6 lg:max-w-7xl">
+						<li>
+							<NavLink href="/">Home</NavLink>
+						</li>
+						<li>
+							<NavLink href="/products">Products</NavLink>
+						</li>
+					</ul>
+				</nav>
 				<section className="sm:py-18 mx-auto flex w-full max-w-2xl flex-grow flex-col px-8 py-12 sm:px-6 lg:max-w-7xl">
 					{children}
 				</section>
