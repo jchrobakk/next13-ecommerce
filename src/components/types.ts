@@ -5,4 +5,9 @@ export type Product = {
 	image: string;
 	category: string;
 	description: string;
+	rating: {
+		rate: number;
+		count: number;
+	};
+	longDescription: string;
 };
