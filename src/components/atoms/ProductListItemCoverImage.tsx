@@ -8,7 +8,7 @@ type ProductListItemCoverImage = {
 
 export const ProductListItemCoverImage = ({ src, alt, size = 320 }: ProductListItemCoverImage) => {
 	return (
-		<div className="aspect-square bg-slate-50 p-4 transition-colors hover:bg-slate-100">
+		<div className="aspect-square rounded-md bg-slate-50 p-4 transition-colors hover:bg-slate-100">
 			<Image
 				alt={alt}
 				src={src}

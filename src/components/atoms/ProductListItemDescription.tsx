@@ -17,7 +17,7 @@ export const ProductListItemDescription = ({
 				<h3 className="font-semibold">{name}</h3>
 				<p>{category}</p>
 			</div>
-			<div className="col-span-1">{formatPrice(price / 100)}</div>
+			<div className="col-span-1 justify-self-end">{formatPrice(price / 100)}</div>
 		</div>
 	);
 };
