@@ -1,9 +1,28 @@
+import { type Metadata } from "next";
 import { getProduct } from "@/api/products";
 import { ProductListItemCoverImage } from "@/components/atoms/ProductListItemCoverImage";
 import { formatPrice } from "@/utils";
 
+export const generateMetadata = async ({
+	params,
+}: {
+	params: { productId: string };
+}): Promise<Metadata> => {
+	const { name, description, image } = await getProduct(params.productId);
+	return {
+		title: name,
+		description: description,
+		openGraph: {
+			title: name,
+			description: description,
+			images: [image],
+		},
+	};
+};
+
 export default async function ProductPage({ params }: { params: { productId: string } }) {
 	const { image, name, description, price } = await getProduct(params.productId);
+
 	return (
 		<article>
 			<div className="grid grid-cols-2 gap-4">
