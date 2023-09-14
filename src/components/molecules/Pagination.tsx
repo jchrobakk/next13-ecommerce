@@ -32,19 +32,20 @@ export const Pagination = ({ currentPage, className }: PaginationProps) => {
 					</ActiveLink>
 				</li>
 			)}
-			{pageNumbers.map((pageNumber) => (
-				<li key={pageNumber}>
-					{pageNumber > 0 && (
-						<ActiveLink
-							href={`/products/${pageNumber}`}
-							className="block h-8 w-8 rounded border border-gray-100 text-center leading-8 text-gray-900"
-							activeClassName="border-blue-600 bg-blue-600 text-white"
-						>
-							{pageNumber}
-						</ActiveLink>
-					)}
-				</li>
-			))}
+			{pageNumbers.map(
+				(pageNumber) =>
+					pageNumber > 0 && (
+						<li key={pageNumber}>
+							<ActiveLink
+								href={`/products/${pageNumber}`}
+								className="block h-8 w-8 rounded border border-gray-100 text-center leading-8 text-gray-900"
+								activeClassName="border-blue-600 bg-blue-600 text-white"
+							>
+								{pageNumber}
+							</ActiveLink>
+						</li>
+					),
+			)}
 			<li>
 				<ActiveLink
 					href={`/products/${currentPage + 1}`}
