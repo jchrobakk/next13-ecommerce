@@ -40,3 +40,16 @@ const transformProduct = (product: ProductResponse): Product => ({
 	rating: product.rating,
 	longDescription: product.longDescription,
 });
+
+export const getProductsByPage = async (page: number): Promise<Product[]> => {
+	const productsPerPage = 8;
+	const offset = (page - 1) * productsPerPage;
+
+	const res = await fetch(
+		`https://naszsklep-api.vercel.app/api/products?take=${productsPerPage}&offset=${offset}`,
+	);
+
+	const productsResponse = (await res.json()) as ProductResponse[];
+
+	return productsResponse.map(transformProduct);
+};
