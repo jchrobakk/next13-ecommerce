@@ -4,21 +4,21 @@ import { usePathname } from "next/navigation";
 import { type ReactNode } from "react";
 import { type Route } from "next";
 
-type ActiveLinkProps = {
-	href: Route;
+type ActiveLinkProps<T extends string> = {
+	href: Route<T>;
 	children: ReactNode;
 	exact?: boolean;
 	className?: string;
 	activeClassName?: string;
 };
 
-export const ActiveLink = ({
+export const ActiveLink = <T extends string>({
 	href,
 	children,
 	exact = true,
 	className = "text-blue-500 hover:text-blue-600 ",
 	activeClassName = "font-semibold",
-}: ActiveLinkProps) => {
+}: ActiveLinkProps<T>) => {
 	const pathname = usePathname();
 
 	const isActive = exact
