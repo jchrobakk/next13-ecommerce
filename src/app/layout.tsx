@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { NavLink } from "@/components/atoms/NavLink";
+import { ActiveLink } from "@/components/atoms/ActiveLink";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,10 +17,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				<nav>
 					<ul className="mx-auto flex max-w-2xl items-center justify-center gap-4 px-8 py-4 sm:px-6 lg:max-w-7xl">
 						<li>
-							<NavLink href="/">Home</NavLink>
+							<ActiveLink href="/">All</ActiveLink>
 						</li>
 						<li>
-							<NavLink href="/products">Products</NavLink>
+							<ActiveLink exact={false} href="/products">
+								Products
+							</ActiveLink>
 						</li>
 					</ul>
 				</nav>
@@ -31,10 +33,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					<p>&copy; {new Date().getFullYear()} next13masters ecommerce</p>
 					<ul className="mx-auto flex max-w-2xl items-center justify-center gap-4 px-8 sm:px-6 lg:max-w-7xl">
 						<li>
-							<NavLink href="/faq">FAQ</NavLink>
+							<ActiveLink href="/faq">FAQ</ActiveLink>
 						</li>
 						<li>
-							<NavLink href="/tos">Terms of Service</NavLink>
+							<ActiveLink href="/tos">Terms of Service</ActiveLink>
 						</li>
 					</ul>
 				</footer>
