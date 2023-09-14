@@ -4,15 +4,21 @@ import { usePathname } from "next/navigation";
 import { type ReactNode } from "react";
 import { type Route } from "next";
 
+type ActiveLinkProps = {
+	href: Route;
+	children: ReactNode;
+	exact?: boolean;
+	className?: string;
+	activeClassName?: string;
+};
+
 export const ActiveLink = ({
 	href,
 	children,
 	exact = true,
-}: {
-	href: Route;
-	children: ReactNode;
-	exact?: boolean;
-}) => {
+	className = "text-blue-500 hover:text-blue-600 ",
+	activeClassName = "font-semibold",
+}: ActiveLinkProps) => {
 	const pathname = usePathname();
 
 	const isActive = exact
@@ -21,10 +27,7 @@ export const ActiveLink = ({
 		  (pathname[href.length] === "/" || pathname.length === href.length);
 
 	return (
-		<Link
-			href={href}
-			className={`text-blue-500 hover:text-blue-600 ${isActive && "font-semibold"}`}
-		>
+		<Link href={href} className={`${className} ${isActive && activeClassName}`}>
 			{children}
 		</Link>
 	);
