@@ -9,7 +9,10 @@ export const Pagination = ({ currentPage, className }: PaginationProps) => {
 	const pageNumbers = Array.from({ length: 10 }, (_, i) => currentPage - 5 + i);
 
 	return (
-		<ol className={`flex justify-center gap-1 text-xs font-medium ${className}`}>
+		<ol
+			className={`flex justify-center gap-1 text-xs font-medium ${className}`}
+			aria-label="Pagination"
+		>
 			{currentPage > 1 && (
 				<li>
 					<ActiveLink
