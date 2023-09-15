@@ -1,7 +1,18 @@
 import { type Metadata } from "next";
-import { getProduct } from "@/api/products";
+import { getProduct, getProductsList } from "@/api/products";
 import { ProductListItemCoverImage } from "@/components/atoms/ProductListItemCoverImage";
 import { formatPrice } from "@/utils";
+
+export const generateStaticParams = async () => {
+	const products = await getProductsList();
+	return products
+		.map((product) => {
+			return {
+				productId: product.id,
+			};
+		})
+		.slice(0, 10);
+};
 
 export const generateMetadata = async ({
 	params,
