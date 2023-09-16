@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		<html lang="en">
 			<body className={inter.className}>
 				<nav>
-					<ul className="mx-auto flex max-w-2xl items-center justify-center gap-4 px-8 py-4 sm:px-6 lg:max-w-7xl">
+					<ul className="mx-auto flex max-w-4xl items-center justify-center gap-4 px-8 py-4 sm:px-6 lg:max-w-7xl">
 						<li>
 							<ActiveLink href="/">Home</ActiveLink>
 						</li>
@@ -26,12 +26,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 						</li>
 					</ul>
 				</nav>
-				<section className="sm:py-18 mx-auto flex w-full max-w-2xl flex-grow flex-col px-8 py-12 sm:px-6 lg:max-w-7xl">
+				<section className="sm:py-18 mx-auto flex w-full max-w-4xl flex-grow flex-col px-8 py-12 sm:px-6 lg:max-w-7xl">
 					{children}
 				</section>
 				<footer className="text-center">
 					<p>&copy; {new Date().getFullYear()} next13masters ecommerce</p>
-					<ul className="mx-auto flex max-w-2xl items-center justify-center gap-4 px-8 sm:px-6 lg:max-w-7xl">
+					<ul className="mx-auto flex max-w-4xl items-center justify-center gap-4 px-8 sm:px-6 lg:max-w-7xl">
 						<li>
 							<ActiveLink href="/faq">FAQ</ActiveLink>
 						</li>
