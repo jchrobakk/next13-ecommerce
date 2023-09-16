@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 						</li>
 					</ul>
 				</nav>
-				<section className="sm:py-18 mx-auto flex w-full max-w-4xl flex-grow flex-col px-8 py-12 sm:px-6 lg:max-w-7xl">
+				<section className="sm:py-18 mx-auto flex w-full max-w-4xl flex-grow flex-col px-8 py-12 text-gray-600 sm:px-6 lg:max-w-7xl">
 					{children}
 				</section>
 				<footer className="text-center">
