@@ -16,8 +16,8 @@ export const ActiveLink = <T extends string>({
 	href,
 	children,
 	exact = true,
-	className = "text-blue-500 hover:text-blue-600 ",
-	activeClassName = "font-semibold border-b border-blue-600",
+	className = "text-blue-600 hover:text-blue-700 ",
+	activeClassName = "font-semibold border-b border-blue-700",
 }: ActiveLinkProps<T>) => {
 	const pathname = usePathname();
 
