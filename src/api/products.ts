@@ -3,16 +3,11 @@ import { ProductsGetListDocument, type TypedDocumentString } from "@/gql/graphql
 
 type ProductResponse = {
 	id: string;
-	title: string;
+	name: string;
 	price: number;
 	description: string;
-	category: string;
-	rating: {
-		rate: number;
-		count: number;
-	};
-	image: string;
-	longDescription: string;
+	categories: { name: string }[];
+	images: { url: string }[];
 };
 
 export const getProductsList = async (): Promise<Product[]> => {
@@ -40,11 +35,11 @@ export const getProduct = async (id: string): Promise<Product> => {
 
 const transformProduct = (product: ProductResponse): Product => ({
 	id: product.id,
-	name: product.title,
+	name: product.name,
 	price: product.price,
 	description: product.description,
-	category: product.category,
-	image: product.image,
+	category: product.categories[0]?.name || "No Category",
+	image: product.images[0]?.url,
 });
 
 export const getProductsByPage = async (page: number): Promise<Product[]> => {
