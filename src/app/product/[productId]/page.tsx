@@ -20,21 +20,23 @@ export const generateMetadata = async ({
 	params: { productId: string };
 }): Promise<Metadata> => {
 	const { name, description, image } = await getProduct(params.productId);
+	const images = [];
+	if (image) {
+		images.push(image);
+	}
 	return {
 		title: name,
 		description: description,
 		openGraph: {
 			title: name,
 			description: description,
-			images: [image],
+			images: images,
 		},
 	};
 };
 
 export default async function ProductPage({ params }: { params: { productId: string } }) {
-	const { image, name, description, price, category, rating } = await getProduct(params.productId);
-
-	console.log(rating);
+	const { image, name, description, price, category } = await getProduct(params.productId);
 
 	return (
 		<article>

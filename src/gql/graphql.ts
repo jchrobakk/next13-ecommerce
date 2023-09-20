@@ -10684,7 +10684,7 @@ export type _SystemDateTimeFieldVariation =
 export type ProductsGetListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ProductsGetListQuery = { products: Array<{ id: string, name: string, description: string, price: number, images: Array<{ url: string }> }> };
+export type ProductsGetListQuery = { products: Array<{ id: string, name: string, description: string, price: number, images: Array<{ url: string }>, categories: Array<{ name: string }> }> };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -10712,6 +10712,9 @@ export const ProductsGetListDocument = new TypedDocumentString(`
       url
     }
     price
+    categories {
+      name
+    }
   }
 }
     `) as unknown as TypedDocumentString<ProductsGetListQuery, ProductsGetListQueryVariables>;
