@@ -1,7 +1,7 @@
 type ProductListItemDescriptionProps = {
 	name: string;
 	price: number;
-	category: string;
+	category?: string;
 };
 
 import { formatPrice } from "@/utils";

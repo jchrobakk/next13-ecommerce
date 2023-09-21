@@ -1,15 +1,5 @@
 query ProductGetById($id: ID!) {
 	product(where: { id: $id }) {
-		name
-		id
-		price
-		description
-		categories {
-			id
-			name
-		}
-		images(first: 1) {
-			url
-		}
+		...Product
 	}
 }

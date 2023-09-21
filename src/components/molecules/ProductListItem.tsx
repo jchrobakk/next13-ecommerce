@@ -1,14 +1,16 @@
 import Link from "next/link";
 import { ProductListItemCoverImage } from "../atoms/ProductListItemCoverImage";
 import { ProductListItemDescription } from "../atoms/ProductListItemDescription";
-import { type Product } from "../types";
+import { type ProductFragment } from "@/gql/graphql";
 
 type ProductListItemProps = {
-	product: Product;
+	product: ProductFragment;
 };
 
 export const ProductListItem = ({ product }: ProductListItemProps) => {
-	const { id, image, name, price, category } = product;
+	const { id, name, price, categories, images } = product;
+	const image = images[0]?.url;
+	const category = categories[0]?.name;
 	return (
 		<li className="cursor-pointer">
 			<Link href={`/product/${id}`}>

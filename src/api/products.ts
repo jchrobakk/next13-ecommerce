@@ -1,39 +1,32 @@
-import { type Product } from "@/components/types";
-import { ProductsGetListDocument } from "@/gql/graphql";
-import { transformProduct, executeGraphql } from "@/utils";
+import {
+	ProductsGetListDocument,
+	ProductGetByPageDocument,
+	ProductGetByIdDocument,
+} from "@/gql/graphql";
+import { executeGraphql } from "@/utils";
 
-type ProductResponse = {
-	id: string;
-	name: string;
-	price: number;
-	description: string;
-	categories: { name: string }[];
-	images: { url: string }[];
-};
-
-export const getProductsList = async (): Promise<Product[]> => {
+export const getProductsList = async () => {
 	const graphqlResponse = await executeGraphql(ProductsGetListDocument, {});
 
-	return graphqlResponse.products.map(transformProduct);
+	return graphqlResponse.products;
 };
 
-export const getProduct = async (id: string): Promise<Product> => {
-	const res = await fetch(`https://naszsklep-api.vercel.app/api/products/${id}`);
+export const getProduct = async (id: string) => {
+	const graphqlResponse = await executeGraphql(ProductGetByIdDocument, {
+		id,
+	});
 
-	const productResponse = (await res.json()) as ProductResponse;
-
-	return transformProduct(productResponse);
+	return graphqlResponse.product;
 };
 
-export const getProductsByPage = async (page: number): Promise<Product[]> => {
-	const productsPerPage = 8;
+export const getProductsByPage = async (page: number) => {
+	const productsPerPage = 2;
 	const offset = (page - 1) * productsPerPage;
 
-	const res = await fetch(
-		`https://naszsklep-api.vercel.app/api/products?take=${productsPerPage}&offset=${offset}`,
-	);
+	const graphqlResponse = await executeGraphql(ProductGetByPageDocument, {
+		skip: offset,
+		first: productsPerPage,
+	});
 
-	const productsResponse = (await res.json()) as ProductResponse[];
-
-	return productsResponse.map(transformProduct);
+	return graphqlResponse.products;
 };
