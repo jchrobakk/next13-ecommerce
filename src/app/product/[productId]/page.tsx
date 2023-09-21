@@ -1,40 +1,44 @@
-// import { type Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getProduct } from "@/api/products";
+import { type Metadata } from "next";
+import { getProduct, getProductsList } from "@/api/products";
 import { formatPrice } from "@/utils";
 import { ProductImage } from "@/components/atoms/ProductImage";
 
-// export const generateStaticParams = async () => {
-// 	const products = await getProductsList();
-// 	return products
-// 		.map((product) => {
-// 			return {
-// 				productId: product.id,
-// 			};
-// 		})
-// 		.slice(0, 10);
-// };
+export const generateStaticParams = async () => {
+	const products = await getProductsList();
+	return products
+		.map((product) => {
+			return {
+				productId: product.id,
+			};
+		})
+		.slice(0, 3);
+};
 
-// export const generateMetadata = async ({
-// 	params,
-// }: {
-// 	params: { productId: string };
-// }): Promise<Metadata> => {
-// 	const { name, description, image } = await getProduct(params.productId);
-// 	const images = [];
-// 	if (image) {
-// 		images.push(image);
-// 	}
-// 	return {
-// 		title: name,
-// 		description: description,
-// 		openGraph: {
-// 			title: name,
-// 			description: description,
-// 			images: images,
-// 		},
-// 	};
-// };
+export const generateMetadata = async ({
+	params,
+}: {
+	params: { productId: string };
+}): Promise<Metadata> => {
+	const product = await getProduct(params.productId);
+	if (!product) {
+		notFound();
+	}
+
+	const { name, description, images } = product;
+	const image = images[0]?.url;
+	const ogImages = image ? [image] : [];
+
+	return {
+		title: name,
+		description: description,
+		openGraph: {
+			title: name,
+			description: description,
+			images: ogImages,
+		},
+	};
+};
 
 export default async function ProductPage({ params }: { params: { productId: string } }) {
 	const product = await getProduct(params.productId);
