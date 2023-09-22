@@ -2,8 +2,11 @@ import {
 	ProductsGetListDocument,
 	ProductGetByPageDocument,
 	ProductGetByIdDocument,
+	ProductsGetByCategorySlugDocument,
 } from "@/gql/graphql";
 import { executeGraphql } from "@/utils";
+
+const productsPerPage = 4;
 
 export const getProductsList = async () => {
 	const graphqlResponse = await executeGraphql(ProductsGetListDocument, {});
@@ -20,7 +23,6 @@ export const getProduct = async (id: string) => {
 };
 
 export const getProductsByPage = async (page: number) => {
-	const productsPerPage = 4;
 	const offset = (page - 1) * productsPerPage;
 
 	const graphqlResponse = await executeGraphql(ProductGetByPageDocument, {
@@ -29,4 +31,15 @@ export const getProductsByPage = async (page: number) => {
 	});
 
 	return graphqlResponse.products;
+};
+
+export const getProductsByCategorySlug = async (category: string, page: number) => {
+	const offset = (page - 1) * productsPerPage;
+	const graphqlResponse = await executeGraphql(ProductsGetByCategorySlugDocument, {
+		slug: category,
+		skip: offset,
+		first: productsPerPage,
+	});
+
+	return graphqlResponse.categories;
 };

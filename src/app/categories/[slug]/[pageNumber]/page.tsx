@@ -1,8 +1,21 @@
-export default function Category({ params }: { params: { slug: string; pageNumber: string } }) {
+import { getProductsByCategorySlug } from "@/api/products";
+import { ProductList } from "@/components/organisms/ProductList";
+
+export default async function Category({
+	params,
+}: {
+	params: { slug: string; pageNumber: string };
+}) {
+	const products = await getProductsByCategorySlug(params.slug, +params.pageNumber);
 	return (
-		<div>
-			<h1>Category: {params.slug}</h1>
-			<p>Page: {params.pageNumber}</p>
-		</div>
+		<>
+			{products[0] ? (
+				<>
+					<ProductList products={products[0].products} />
+				</>
+			) : (
+				<p>There are no products in this category</p>
+			)}
+		</>
 	);
 }
