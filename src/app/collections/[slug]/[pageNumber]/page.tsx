@@ -1,14 +1,14 @@
 import { notFound } from "next/navigation";
-import { getProductsByCategorySlug } from "@/api/products";
+import { getProductsByCollectionSlug } from "@/api/products";
 import { Pagination } from "@/components/molecules/Pagination";
 import { ProductList } from "@/components/organisms/ProductList";
 
-export default async function Category({
+export default async function Collection({
 	params,
 }: {
 	params: { slug: string; pageNumber: string };
 }) {
-	const products = await getProductsByCategorySlug(params.slug, +params.pageNumber);
+	const products = await getProductsByCollectionSlug(params.slug, +params.pageNumber);
 
 	if (!products) {
 		notFound();
