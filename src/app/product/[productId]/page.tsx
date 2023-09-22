@@ -1,8 +1,10 @@
 import { notFound } from "next/navigation";
 import { type Metadata } from "next";
+import { Suspense } from "react";
 import { getProduct, getProductsList } from "@/api/products";
 import { formatPrice } from "@/utils";
 import { ProductImage } from "@/components/atoms/ProductImage";
+import { SuggestedProducts } from "@/components/organisms/SuggestedProducts";
 
 export const generateStaticParams = async () => {
 	const products = await getProductsList();
@@ -55,7 +57,7 @@ export default async function ProductPage({ params }: { params: { productId: str
 			<div className="flex flex-col gap-4 md:flex-row">
 				<ProductImage src={image} alt={name} />
 				<section>
-					<h2 className="title-font text-sm uppercase tracking-widest text-gray-500">{category}</h2>
+					<h3 className="title-font text-sm uppercase tracking-widest text-gray-500">{category}</h3>
 					<h1 className="title-font mb-1 text-3xl font-medium text-gray-900">{name}</h1>
 					{/* todo: implement MDX */}
 					{/* todo: implement rating component (stars) */}
@@ -68,6 +70,11 @@ export default async function ProductPage({ params }: { params: { productId: str
 					</div>
 				</section>
 			</div>
+			<section>
+				<Suspense fallback={"loading"}>
+					<SuggestedProducts />
+				</Suspense>
+			</section>
 		</article>
 	);
 }
