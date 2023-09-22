@@ -20,7 +20,7 @@ export const getProduct = async (id: string) => {
 };
 
 export const getProductsByPage = async (page: number) => {
-	const productsPerPage = 2;
+	const productsPerPage = 4;
 	const offset = (page - 1) * productsPerPage;
 
 	const graphqlResponse = await executeGraphql(ProductGetByPageDocument, {
