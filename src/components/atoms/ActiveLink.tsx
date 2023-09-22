@@ -26,7 +26,12 @@ export const ActiveLink = <T extends string>({
 		: pathname.startsWith(href) &&
 		  (pathname[href.length] === "/" || pathname.length === href.length);
 
-	return (
+	// @TODO: maybe refactor this, because its not looking too good but it works and pass the tests
+	return isActive ? (
+		<Link href={href} className={`${className} ${isActive && activeClassName}`} aria-current>
+			{children}
+		</Link>
+	) : (
 		<Link href={href} className={`${className} ${isActive && activeClassName}`}>
 			{children}
 		</Link>
