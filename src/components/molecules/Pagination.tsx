@@ -3,9 +3,10 @@ import { ActiveLink } from "../atoms/ActiveLink";
 type PaginationProps = {
 	currentPage: number;
 	className?: string;
+	target?: "products" | `categories/${string}`;
 };
 
-export const Pagination = ({ currentPage, className }: PaginationProps) => {
+export const Pagination = ({ currentPage, className, target = "products" }: PaginationProps) => {
 	const pageNumbers = Array.from({ length: 10 }, (_, i) => currentPage - 5 + i);
 
 	return (
@@ -16,7 +17,7 @@ export const Pagination = ({ currentPage, className }: PaginationProps) => {
 			{currentPage > 1 && (
 				<li>
 					<ActiveLink
-						href={`/products/${currentPage - 1}`}
+						href={`/${target}/${currentPage - 1}`}
 						className="inline-flex h-8 w-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900"
 					>
 						<span className="sr-only">Previous Page</span>
@@ -40,7 +41,7 @@ export const Pagination = ({ currentPage, className }: PaginationProps) => {
 					pageNumber > 0 && (
 						<li key={pageNumber}>
 							<ActiveLink
-								href={`/products/${pageNumber}`}
+								href={`/${target}/${pageNumber}`}
 								className="block h-8 w-8 rounded border border-gray-100 text-center leading-8 text-gray-900"
 								activeClassName="border-blue-600 bg-blue-600 text-white"
 							>
@@ -51,7 +52,7 @@ export const Pagination = ({ currentPage, className }: PaginationProps) => {
 			)}
 			<li>
 				<ActiveLink
-					href={`/products/${currentPage + 1}`}
+					href={`/${target}/${currentPage + 1}`}
 					className="inline-flex h-8 w-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900"
 				>
 					<span className="sr-only">Next Page</span>
