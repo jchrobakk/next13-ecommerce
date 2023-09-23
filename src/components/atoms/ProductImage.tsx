@@ -13,7 +13,7 @@ export const ProductImage = ({ src, alt, size = 320 }: ProductImageProps) => {
 			src={src}
 			width={size}
 			height={size}
-			className="aspect-square w-full object-contain object-center transition-transform hover:scale-105"
+			className="aspect-square w-full max-w-xl object-contain object-center transition-transform hover:scale-105"
 		/>
 	) : (
 		"no image"

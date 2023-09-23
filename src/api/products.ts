@@ -4,6 +4,7 @@ import {
 	ProductGetByIdDocument,
 	ProductsGetByCategorySlugDocument,
 	ProductsGetByCollectionSlugDocument,
+	ProductGetColorSizeVariantsByIdDocument,
 } from "@/gql/graphql";
 import { executeGraphql } from "@/utils";
 
@@ -54,4 +55,12 @@ export const getProductsByCollectionSlug = async (collection: string, page: numb
 	});
 
 	return graphqlResponse.collections[0]?.products;
+};
+
+export const getColorSizeVariantsByProductId = async (id: string) => {
+	const graphqlResponse = await executeGraphql(ProductGetColorSizeVariantsByIdDocument, {
+		id,
+	});
+
+	return graphqlResponse.product?.variants || [];
 };

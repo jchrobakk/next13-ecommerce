@@ -19,7 +19,9 @@ const documents = {
     "query ProductsGetByCollectionSlug($slug: String!, $skip: Int, $first: Int) {\n  collections(where: {slug: $slug}) {\n    products(skip: $skip, first: $first) {\n      ...Product\n    }\n  }\n}": types.ProductsGetByCollectionSlugDocument,
     "query ProductGetById($id: ID!) {\n  product(where: {id: $id}) {\n    ...Product\n  }\n}": types.ProductGetByIdDocument,
     "query ProductGetByPage($skip: Int!, $first: Int!) {\n  products(skip: $skip, first: $first) {\n    ...Product\n  }\n}": types.ProductGetByPageDocument,
+    "query ProductGetColorSizeVariantsById($id: ID!) {\n  product(where: {id: $id}) {\n    variants {\n      ... on ProductSizeColorVariant {\n        ...Variant\n      }\n    }\n  }\n}": types.ProductGetColorSizeVariantsByIdDocument,
     "query ProductsGetList {\n  products(first: 10) {\n    ...Product\n  }\n}": types.ProductsGetListDocument,
+    "fragment Variant on ProductSizeColorVariant {\n  id\n  name\n}": types.VariantFragmentDoc,
 };
 
 /**
@@ -45,7 +47,15 @@ export function graphql(source: "query ProductGetByPage($skip: Int!, $first: Int
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "query ProductGetColorSizeVariantsById($id: ID!) {\n  product(where: {id: $id}) {\n    variants {\n      ... on ProductSizeColorVariant {\n        ...Variant\n      }\n    }\n  }\n}"): typeof import('./graphql').ProductGetColorSizeVariantsByIdDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "query ProductsGetList {\n  products(first: 10) {\n    ...Product\n  }\n}"): typeof import('./graphql').ProductsGetListDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "fragment Variant on ProductSizeColorVariant {\n  id\n  name\n}"): typeof import('./graphql').VariantFragmentDoc;
 
 
 export function graphql(source: string) {
