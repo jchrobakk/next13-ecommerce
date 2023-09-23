@@ -15,7 +15,7 @@ export const generateStaticParams = async () => {
 				productId: product.id,
 			};
 		})
-		.slice(0, 3);
+		.slice(0, 6);
 };
 
 export const generateMetadata = async ({
