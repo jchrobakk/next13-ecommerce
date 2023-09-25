@@ -38,6 +38,7 @@ export const Search = () => {
 				</label>
 
 				<input
+					role="searchbox"
 					type="text"
 					id="Search"
 					placeholder="Search for..."
