@@ -1,14 +1,17 @@
+import { getProductsListByName } from "@/api/products";
+import { ProductList } from "@/components/organisms/ProductList";
+
 type SearchPageProps = {
 	searchParams: {
 		query: string;
 	};
 };
 
-export default function SearchPage({ searchParams }: SearchPageProps) {
+export default async function SearchPage({ searchParams }: SearchPageProps) {
+	const products = await getProductsListByName(searchParams.query);
 	return (
-		<div>
-			<h1>Search Page</h1>
-			<p>Search query: {searchParams.query}</p>
-		</div>
+		<>
+			<ProductList products={products} />
+		</>
 	);
 }

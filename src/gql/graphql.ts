@@ -10777,6 +10777,13 @@ export type ProductGetByIdQueryVariables = Exact<{
 
 export type ProductGetByIdQuery = { product?: { id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> } | null };
 
+export type ProductGetByNameQueryVariables = Exact<{
+  name: Scalars['String']['input'];
+}>;
+
+
+export type ProductGetByNameQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
+
 export type ProductGetByPageQueryVariables = Exact<{
   skip: Scalars['Int']['input'];
   first: Scalars['Int']['input'];
@@ -10891,6 +10898,24 @@ export const ProductGetByIdDocument = new TypedDocumentString(`
   }
   price
 }`) as unknown as TypedDocumentString<ProductGetByIdQuery, ProductGetByIdQueryVariables>;
+export const ProductGetByNameDocument = new TypedDocumentString(`
+    query ProductGetByName($name: String!) {
+  products(where: {name_contains: $name}) {
+    ...Product
+  }
+}
+    fragment Product on Product {
+  id
+  name
+  description
+  categories(first: 1) {
+    name
+  }
+  images(first: 1) {
+    url
+  }
+  price
+}`) as unknown as TypedDocumentString<ProductGetByNameQuery, ProductGetByNameQueryVariables>;
 export const ProductGetByPageDocument = new TypedDocumentString(`
     query ProductGetByPage($skip: Int!, $first: Int!) {
   products(skip: $skip, first: $first) {

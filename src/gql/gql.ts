@@ -18,6 +18,7 @@ const documents = {
     "query ProductsGetByCategorySlug($slug: String!, $skip: Int, $first: Int) {\n  categories(where: {slug: $slug}) {\n    products(skip: $skip, first: $first) {\n      ...Product\n    }\n  }\n}": types.ProductsGetByCategorySlugDocument,
     "query ProductsGetByCollectionSlug($slug: String!, $skip: Int, $first: Int) {\n  collections(where: {slug: $slug}) {\n    products(skip: $skip, first: $first) {\n      ...Product\n    }\n  }\n}": types.ProductsGetByCollectionSlugDocument,
     "query ProductGetById($id: ID!) {\n  product(where: {id: $id}) {\n    ...Product\n  }\n}": types.ProductGetByIdDocument,
+    "query ProductGetByName($name: String!) {\n  products(where: {name_contains: $name}) {\n    ...Product\n  }\n}": types.ProductGetByNameDocument,
     "query ProductGetByPage($skip: Int!, $first: Int!) {\n  products(skip: $skip, first: $first) {\n    ...Product\n  }\n}": types.ProductGetByPageDocument,
     "query ProductGetColorSizeVariantsById($id: ID!) {\n  product(where: {id: $id}) {\n    variants {\n      ... on ProductSizeColorVariant {\n        ...Variant\n      }\n    }\n  }\n}": types.ProductGetColorSizeVariantsByIdDocument,
     "query ProductsGetList {\n  products(first: 10) {\n    ...Product\n  }\n}": types.ProductsGetListDocument,
@@ -40,6 +41,10 @@ export function graphql(source: "query ProductsGetByCollectionSlug($slug: String
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query ProductGetById($id: ID!) {\n  product(where: {id: $id}) {\n    ...Product\n  }\n}"): typeof import('./graphql').ProductGetByIdDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query ProductGetByName($name: String!) {\n  products(where: {name_contains: $name}) {\n    ...Product\n  }\n}"): typeof import('./graphql').ProductGetByNameDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
