@@ -19,13 +19,15 @@ export const Search = () => {
 	};
 
 	useEffect(() => {
-		const timeoutId = setTimeout(() => {
-			router.push(`/search?query=${searchQuery}`);
-		}, 500);
+		if (searchQuery) {
+			const timeoutId = setTimeout(() => {
+				router.push(`/search?query=${searchQuery}`);
+			}, 500);
 
-		return () => {
-			clearTimeout(timeoutId);
-		};
+			return () => {
+				clearTimeout(timeoutId);
+			};
+		}
 	}, [searchQuery, router]);
 
 	return (
