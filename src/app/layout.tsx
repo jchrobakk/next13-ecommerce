@@ -15,8 +15,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				<nav>
-					<ul className="mx-auto flex max-w-4xl items-center justify-center gap-4 px-8 py-4 sm:px-6 lg:max-w-7xl">
+				<nav className="mx-auto flex max-w-4xl items-center justify-between gap-4 px-8 py-4 sm:px-6 lg:max-w-7xl">
+					<ul className="flex gap-4">
 						<li>
 							<ActiveLink href="/">Home</ActiveLink>
 						</li>
