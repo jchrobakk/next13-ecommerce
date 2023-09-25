@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ActiveLink } from "@/components/atoms/ActiveLink";
+import { Search } from "@/components/atoms/Search";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -46,6 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 							</ActiveLink>
 						</li>
 					</ul>
+					<Search />
 				</nav>
 				<section className="sm:py-18 mx-auto flex w-full max-w-4xl flex-grow flex-col px-8 py-12 text-gray-600 sm:px-6 lg:max-w-7xl">
 					{children}
