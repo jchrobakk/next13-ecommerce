@@ -2,7 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ActiveLink } from "@/components/atoms/ActiveLink";
-import { Search } from "@/components/atoms/Search";
+import { Navbar } from "@/components/molecules/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,40 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				<nav className="mx-auto flex max-w-4xl items-center justify-between gap-4 px-8 py-4 sm:px-6 lg:max-w-7xl">
-					<ul className="flex gap-4">
-						<li>
-							<ActiveLink href="/">Home</ActiveLink>
-						</li>
-						<li>
-							<ActiveLink exact={false} href="/products">
-								All
-							</ActiveLink>
-						</li>
-						<li>
-							<ActiveLink href="/categories">Categories</ActiveLink>
-						</li>
-						<li>
-							<ActiveLink href="/collections">Collections</ActiveLink>
-						</li>
-						<li>
-							<ActiveLink exact={false} href="/categories/t-shirts">
-								T-shirts
-							</ActiveLink>
-						</li>
-						<li>
-							<ActiveLink exact={false} href="/categories/hoodies">
-								Hoodies
-							</ActiveLink>
-						</li>
-						<li>
-							<ActiveLink exact={false} href="/categories/accessories">
-								Accessories
-							</ActiveLink>
-						</li>
-					</ul>
-					<Search />
-				</nav>
+				<Navbar />
 				<section className="sm:py-18 mx-auto flex w-full max-w-4xl flex-grow flex-col px-8 py-12 text-gray-600 sm:px-6 lg:max-w-7xl">
 					{children}
 				</section>
