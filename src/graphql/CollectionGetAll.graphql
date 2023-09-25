@@ -1,0 +1,5 @@
+query CollectionsGetAll {
+	collections {
+		...Collection
+	}
+}
