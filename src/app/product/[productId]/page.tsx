@@ -6,6 +6,7 @@ import { formatPrice } from "@/utils";
 import { ProductImage } from "@/components/atoms/ProductImage";
 import { SuggestedProducts } from "@/components/organisms/SuggestedProducts";
 import { ProductVariantPicker } from "@/components/molecules/ProductVariantPicker";
+import { AddToCartButton } from "@/components/atoms/AddToCartButton";
 
 export const generateStaticParams = async () => {
 	const products = await getProductsList();
@@ -53,6 +54,10 @@ export default async function ProductPage({ params }: { params: { productId: str
 	const image = images[0]?.url;
 	const category = categories[0]?.name;
 
+	async function addProductToCartAction() {
+		"use server";
+	}
+
 	return (
 		<article>
 			<div className="flex flex-col gap-4 md:flex-row">
@@ -66,9 +71,9 @@ export default async function ProductPage({ params }: { params: { productId: str
 					<ProductVariantPicker id={product.id} />
 					<div className="mt-5 flex justify-between align-baseline">
 						<p className="text-2xl font-medium text-gray-900">{formatPrice(price / 100)}</p>
-						<button className="inline-block rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition-colors hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500">
-							Add to cart
-						</button>
+						<form action={addProductToCartAction}>
+							<AddToCartButton />
+						</form>
 					</div>
 				</section>
 			</div>
