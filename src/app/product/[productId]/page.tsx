@@ -1,12 +1,15 @@
 import { notFound } from "next/navigation";
 import { type Metadata } from "next";
 import { Suspense } from "react";
+import { cookies } from "next/headers";
 import { getProduct, getProductsList } from "@/api/products";
 import { formatPrice } from "@/utils";
 import { ProductImage } from "@/components/atoms/ProductImage";
 import { SuggestedProducts } from "@/components/organisms/SuggestedProducts";
 import { ProductVariantPicker } from "@/components/molecules/ProductVariantPicker";
 import { AddToCartButton } from "@/components/atoms/AddToCartButton";
+
+import { getOrCreateCart, addToCart } from "@/api/cart";
 
 export const generateStaticParams = async () => {
 	const products = await getProductsList();
@@ -54,8 +57,17 @@ export default async function ProductPage({ params }: { params: { productId: str
 	const image = images[0]?.url;
 	const category = categories[0]?.name;
 
-	async function addProductToCartAction() {
+	async function addProductToCartAction(formData: FormData) {
 		"use server";
+		console.log("addProductToCartAction");
+		console.log(formData);
+
+		const cart = await getOrCreateCart();
+		cookies().set("cartId", cart.id, {
+			httpOnly: true,
+			sameSite: "lax",
+		});
+		await addToCart(cart.id, params.productId);
 	}
 
 	return (
@@ -72,6 +84,7 @@ export default async function ProductPage({ params }: { params: { productId: str
 					<div className="mt-5 flex justify-between align-baseline">
 						<p className="text-2xl font-medium text-gray-900">{formatPrice(price / 100)}</p>
 						<form action={addProductToCartAction}>
+							<input type="hidden" name="productId" value={product.id} />
 							<AddToCartButton />
 						</form>
 					</div>
