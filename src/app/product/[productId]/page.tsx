@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { type Metadata } from "next";
 import { Suspense } from "react";
-import { cookies } from "next/headers";
 import { getProduct, getProductsList } from "@/api/products";
 import { formatPrice } from "@/utils";
 import { ProductImage } from "@/components/atoms/ProductImage";
@@ -57,16 +56,10 @@ export default async function ProductPage({ params }: { params: { productId: str
 	const image = images[0]?.url;
 	const category = categories[0]?.name;
 
-	async function addProductToCartAction(formData: FormData) {
+	async function addProductToCartAction(_formData: FormData) {
 		"use server";
-		console.log("addProductToCartAction");
-		console.log(formData);
 
 		const cart = await getOrCreateCart();
-		cookies().set("cartId", cart.id, {
-			httpOnly: true,
-			sameSite: "lax",
-		});
 		await addToCart(cart.id, params.productId);
 	}
 

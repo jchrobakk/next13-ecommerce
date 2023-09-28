@@ -32,6 +32,11 @@ export async function getOrCreateCart(): Promise<CartFragment> {
 		throw new Error("Failed to create cart");
 	}
 
+	cookies().set("cartId", cart.createOrder.id, {
+		httpOnly: true,
+		sameSite: "lax",
+	});
+
 	return cart.createOrder;
 }
 export function createCart() {
