@@ -1,4 +1,6 @@
 import { cookies } from "next/headers";
+import Stripe from "stripe";
+import { redirect } from "next/navigation";
 import {
 	CartGetByIdDocument,
 	type CartFragment,
@@ -77,4 +79,52 @@ export async function addToCart(orderId: string, productId: string) {
 		},
 		cache: "no-store",
 	});
+}
+
+export async function handlePayment() {
+	"use server";
+	if (!process.env.STRIPE_SECRET_KEY) {
+		throw new Error("Missing STRIPE_SECRET_KEY");
+	}
+
+	const cart = await getCartFromCookies();
+
+	if (!cart) {
+		throw new Error("Missing cart");
+	}
+
+	const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+		apiVersion: "2023-08-16",
+		typescript: true,
+	});
+
+	const checkoutSession = await stripe.checkout.sessions.create({
+		payment_method_types: ["card"],
+		metadata: {
+			cardId: cart.id,
+		},
+		line_items: cart?.orderItems.map((item) => {
+			return {
+				price_data: {
+					currency: "usd",
+					// doing this because hygraph is giving me types that can possibly be null (its not possible)
+					product_data: {
+						name: item.product?.name || "",
+					},
+					unit_amount: item.product?.price || 0,
+				},
+				quantity: item.quantity,
+			};
+		}),
+		mode: "payment",
+		success_url: "http://localhost:3000/cart/success?sessionId={CHECKOUT_SESSION_ID}",
+		cancel_url: "http://localhost:3000/cart/cancel?sessionId={CHECKOUT_SESSION_ID}",
+	});
+
+	if (!checkoutSession.url) {
+		throw new Error("Something went really wrong with Stripe");
+	}
+
+	cookies().set("cartId", "");
+	redirect(checkoutSession.url);
 }
