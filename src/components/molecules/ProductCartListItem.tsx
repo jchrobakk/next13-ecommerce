@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ProductQuantity } from "../atoms/ProductQuantity";
+import { RemoveFromCartButton } from "../atoms/RemoveFromCartButton";
 import { type CardOrderItemFragment } from "@/gql/graphql";
 
 type ProductCartListItemProps = {
@@ -32,6 +33,7 @@ export function ProductCartListItem({ order }: ProductCartListItemProps) {
 			<div className="flex flex-1 items-center justify-end gap-2">
 				{/* @TODO: add ProductCount */}
 				<ProductQuantity quantity={order.quantity} itemId={order.id} />
+				<RemoveFromCartButton itemId={order.id} />
 			</div>
 		</li>
 	);

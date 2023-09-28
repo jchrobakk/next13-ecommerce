@@ -15,6 +15,9 @@ export const getProductsList = async () => {
 	const graphqlResponse = await executeGraphql({
 		query: ProductsGetListDocument,
 		variables: {},
+		next: {
+			revalidate: 15,
+		},
 	});
 
 	return graphqlResponse.products;
@@ -39,6 +42,9 @@ export const getProductsByPage = async (page: number) => {
 		variables: {
 			skip: offset,
 			first: productsPerPage,
+		},
+		next: {
+			revalidate: 15,
 		},
 	});
 
