@@ -1,0 +1,8 @@
+fragment CartOrderProduct on Product {
+	name
+	price
+	id
+	images {
+		url
+	}
+}

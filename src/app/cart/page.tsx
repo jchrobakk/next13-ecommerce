@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { getCartFromCookies } from "@/api/cart";
+import { ProductCartListItem } from "@/components/molecules/ProductCartListItem";
 
 export default async function CartPage() {
 	const cart = await getCartFromCookies();
@@ -8,5 +9,14 @@ export default async function CartPage() {
 		redirect("/");
 	}
 
-	return <pre>{JSON.stringify(cart, null, 2)}</pre>;
+	return (
+		<section>
+			<h1 className="text-xl font-bold text-gray-900 sm:text-3xl">Your Cart</h1>
+			<ul>
+				{cart.orderItems.map(
+					(item) => item.product && <ProductCartListItem order={item} key={item.product.id} />,
+				)}
+			</ul>
+		</section>
+	);
 }
