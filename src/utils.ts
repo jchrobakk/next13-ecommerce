@@ -7,16 +7,25 @@ export const formatPrice = (price: number) => {
 	}).format(price);
 };
 
-export const executeGraphql = async <TResult, TVariables>(
-	query: TypedDocumentString<TResult, TVariables>,
-	variables: TVariables,
-): Promise<TResult> => {
+export const executeGraphql = async <TResult, TVariables>({
+	query,
+	variables,
+	next,
+	cache,
+}: {
+	query: TypedDocumentString<TResult, TVariables>;
+	variables: TVariables;
+	next?: NextFetchRequestConfig;
+	cache?: RequestCache;
+}): Promise<TResult> => {
 	if (!process.env.GRAPHQL_URL) {
 		throw TypeError("GRAPHQL_URL is not defined");
 	}
 
 	const res = await fetch(process.env.GRAPHQL_URL, {
 		method: "POST",
+		cache,
+		next,
 		headers: {
 			"Content-Type": "application/json",
 			Authorization: `Bearer ${process.env.GRAPHQL_TOKEN}`,

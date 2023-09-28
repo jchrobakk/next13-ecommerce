@@ -1,7 +1,10 @@
 import { ActiveLink } from "../atoms/ActiveLink";
 import { Search } from "../atoms/Search";
+import { getCartFromCookies } from "@/api/cart";
 
-export const Navbar = () => {
+export const Navbar = async () => {
+	const cart = await getCartFromCookies();
+	const quantity = cart?.orderItems.length || 0;
 	return (
 		<nav className="mx-auto flex max-w-4xl items-center justify-between gap-4 px-8 py-4 sm:px-6 lg:max-w-7xl">
 			<ul className="flex gap-4">
@@ -35,7 +38,10 @@ export const Navbar = () => {
 					</ActiveLink>
 				</li>
 			</ul>
-			<Search />
+			<div className="flex items-center gap-4">
+				<Search />
+				<ActiveLink href="/cart">Cart ({quantity})</ActiveLink>
+			</div>
 		</nav>
 	);
 };

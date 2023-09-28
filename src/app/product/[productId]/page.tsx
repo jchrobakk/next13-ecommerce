@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { type Metadata } from "next";
 import { Suspense } from "react";
+import { revalidateTag } from "next/cache";
 import { getProduct, getProductsList } from "@/api/products";
 import { formatPrice } from "@/utils";
 import { ProductImage } from "@/components/atoms/ProductImage";
@@ -61,6 +62,8 @@ export default async function ProductPage({ params }: { params: { productId: str
 
 		const cart = await getOrCreateCart();
 		await addToCart(cart.id, params.productId);
+
+		revalidateTag("cart");
 	}
 
 	return (
