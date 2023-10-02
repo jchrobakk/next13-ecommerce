@@ -10,7 +10,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 		"productId" in json &&
 		typeof json.productId === "string"
 	) {
-		revalidatePath(`/product/${json.productId}`, "page");
+		revalidatePath(`/product/[productId]`, "page");
 		revalidatePath(`/products/[pageNumber]`, "page");
 		revalidatePath("/categories/[slug]/[pageNumber]", "page");
 
