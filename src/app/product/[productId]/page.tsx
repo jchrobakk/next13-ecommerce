@@ -33,18 +33,11 @@ export const generateMetadata = async ({
 		notFound();
 	}
 
-	const { name, description, images } = product;
-	const image = images[0]?.url;
-	const ogImages = image ? [image] : [];
+	const { name, description } = product;
 
 	return {
 		title: name,
 		description: description,
-		openGraph: {
-			title: name,
-			description: description,
-			images: ogImages,
-		},
 	};
 };
 
