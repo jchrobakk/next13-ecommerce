@@ -1,6 +1,7 @@
 export const ReviewForm = () => {
 	return (
-		<form className="space-y-4 lg:col-span-3 lg:p-12">
+		<form className="space-y-4 lg:col-span-3 lg:p-12" data-testid="test-review-form">
+			<h2 className="text-lg font-medium text-gray-900">Write a review</h2>
 			<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
 				<div>
 					<label className="sr-only" htmlFor="email">

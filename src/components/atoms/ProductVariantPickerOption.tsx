@@ -11,7 +11,6 @@ export function ProductVariantPickerOption({ name }: ProductVariantPickerOptionP
 				value={name}
 				id={name}
 				className="peer hidden [&:checked_+_label_svg]:block"
-				checked
 			/>
 
 			<label
