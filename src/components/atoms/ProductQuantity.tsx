@@ -14,18 +14,7 @@ export const ProductQuantity = ({ quantity, itemId }: ProductQuantityProps) => {
 	return (
 		<form className="flex items-center justify-center rounded border border-gray-200">
 			<button
-				formAction={async () => {
-					setOptimisticQuantity(optimisticQuantity + 1);
-					await changeItemQuantity(itemId, optimisticQuantity + 1);
-				}}
-				className="h-10 w-10 leading-10 text-gray-600 transition hover:opacity-75"
-			>
-				+
-			</button>
-			<p className="w-16 border-transparent text-center leading-10 sm:text-sm">
-				{optimisticQuantity}
-			</p>
-			<button
+				data-testid="decrement"
 				formAction={async () => {
 					setOptimisticQuantity(optimisticQuantity - 1);
 					await changeItemQuantity(itemId, optimisticQuantity - 1);
@@ -33,6 +22,22 @@ export const ProductQuantity = ({ quantity, itemId }: ProductQuantityProps) => {
 				className="h-10 w-10 leading-10 text-gray-600 transition hover:opacity-75"
 			>
 				-
+			</button>
+			<p
+				className="w-16 border-transparent text-center leading-10 sm:text-sm"
+				data-testid="quantity"
+			>
+				{optimisticQuantity}
+			</p>
+			<button
+				data-testid="increment"
+				formAction={async () => {
+					setOptimisticQuantity(optimisticQuantity + 1);
+					await changeItemQuantity(itemId, optimisticQuantity + 1);
+				}}
+				className="h-10 w-10 leading-10 text-gray-600 transition hover:opacity-75"
+			>
+				+
 			</button>
 		</form>
 	);
