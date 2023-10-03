@@ -11,19 +11,28 @@ type ProductQuantityProps = {
 export const ProductQuantity = ({ quantity, itemId }: ProductQuantityProps) => {
 	const [optimisticQuantity, setOptimisticQuantity] = useOptimistic(quantity);
 
-	// @TODO: add decrement button
-	// @TODO: implement better ui design
 	return (
-		<form>
-			{optimisticQuantity}
+		<form className="flex items-center justify-center rounded border border-gray-200">
 			<button
 				formAction={async () => {
 					setOptimisticQuantity(optimisticQuantity + 1);
 					await changeItemQuantity(itemId, optimisticQuantity + 1);
 				}}
-				className="ml-2 h-8 w-8 border bg-slate-50"
+				className="h-10 w-10 leading-10 text-gray-600 transition hover:opacity-75"
 			>
 				+
+			</button>
+			<p className="w-16 border-transparent text-center leading-10 sm:text-sm">
+				{optimisticQuantity}
+			</p>
+			<button
+				formAction={async () => {
+					setOptimisticQuantity(optimisticQuantity - 1);
+					await changeItemQuantity(itemId, optimisticQuantity - 1);
+				}}
+				className="h-10 w-10 leading-10 text-gray-600 transition hover:opacity-75"
+			>
+				-
 			</button>
 		</form>
 	);
