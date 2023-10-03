@@ -10,6 +10,7 @@ import { ProductVariantPicker } from "@/components/molecules/ProductVariantPicke
 import { AddToCartButton } from "@/components/atoms/AddToCartButton";
 
 import { getOrCreateCart, addToCart } from "@/api/cart";
+import { ReviewForm } from "@/components/atoms/ReviewForm";
 
 export const generateStaticParams = async () => {
 	const products = await getProductsList();
@@ -86,6 +87,9 @@ export default async function ProductPage({ params }: { params: { productId: str
 					</div>
 				</section>
 			</div>
+			<section className="mt-4">
+				<ReviewForm />
+			</section>
 			<section className="mt-4">
 				<Suspense fallback={"loading"}>
 					<SuggestedProducts />
