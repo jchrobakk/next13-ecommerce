@@ -10,7 +10,7 @@ export const Sort = () => {
 
 	const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		setSortBy(event.target.value);
-		router.push(`${pathname}?sortBy=${event.target.value}`);
+		router.push(`${pathname}?sortBy=${sortBy}`);
 	};
 	return (
 		<div className="mb-4">
