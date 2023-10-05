@@ -21,7 +21,11 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 			},
 		});
 
-		const avgRating = reviews.reduce((acc, cur) => acc + cur.rating, 0) / reviews.length;
+		let avgRating = reviews.reduce((acc, cur) => acc + cur.rating, 0) / reviews.length;
+
+		if (isNaN(avgRating)) {
+			avgRating = 0;
+		}
 
 		await executeGraphql({
 			query: ProductUpdateRatingDocument,
