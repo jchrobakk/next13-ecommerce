@@ -14,6 +14,7 @@ const productsPerPage = 4;
 
 export const getProductsList = async () => {
 	const graphqlResponse = await executeGraphql({
+		cache: "no-cache",
 		next: {
 			tags: ["product"],
 		},
@@ -26,6 +27,7 @@ export const getProductsList = async () => {
 
 export const getProduct = async (id: string) => {
 	const graphqlResponse = await executeGraphql({
+		cache: "no-cache",
 		next: {
 			tags: ["product"],
 		},
@@ -45,6 +47,7 @@ export const getProductsByPage = async (
 	const offset = (page - 1) * productsPerPage;
 
 	const graphqlResponse = await executeGraphql({
+		cache: "no-cache",
 		next: {
 			tags: ["product"],
 		},
@@ -62,6 +65,7 @@ export const getProductsByPage = async (
 export const getProductsByCategorySlug = async (category: string, page: number) => {
 	const offset = (page - 1) * productsPerPage;
 	const graphqlResponse = await executeGraphql({
+		cache: "no-cache",
 		next: {
 			tags: ["product"],
 		},
@@ -79,6 +83,7 @@ export const getProductsByCategorySlug = async (category: string, page: number) 
 export const getProductsByCollectionSlug = async (collection: string, page: number) => {
 	const offset = (page - 1) * productsPerPage;
 	const graphqlResponse = await executeGraphql({
+		cache: "no-cache",
 		next: {
 			tags: ["product"],
 		},
@@ -95,6 +100,7 @@ export const getProductsByCollectionSlug = async (collection: string, page: numb
 
 export const getColorSizeVariantsByProductId = async (id: string) => {
 	const graphqlResponse = await executeGraphql({
+		cache: "no-cache",
 		next: {
 			tags: ["product"],
 		},
@@ -109,6 +115,7 @@ export const getColorSizeVariantsByProductId = async (id: string) => {
 
 export const getProductsListByName = async (name: string) => {
 	const graphqlResponse = await executeGraphql({
+		cache: "no-cache",
 		next: {
 			tags: ["product"],
 		},
