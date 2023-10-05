@@ -11,13 +11,16 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 		"data" in json &&
 		typeof json.data === "object" &&
 		json.data !== null &&
-		"id" in json.data &&
-		typeof json.data.id === "string"
+		"product" in json.data &&
+		typeof json.data.product === "object" &&
+		json.data.product !== null &&
+		"id" in json.data.product &&
+		typeof json.data.product.id === "string"
 	) {
 		const { reviews } = await executeGraphql({
 			query: ReviewGetByProductIdDocument,
 			variables: {
-				productId: json.data.id,
+				productId: json.data.product.id,
 			},
 		});
 
@@ -30,13 +33,13 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 		await executeGraphql({
 			query: ProductUpdateRatingDocument,
 			variables: {
-				id: json.data.id,
+				id: json.data.product.id,
 				rating: avgRating,
 			},
 		});
 
 		return NextResponse.json(
-			{ message: `Success. Updated product ${json.data.id} rating to ${avgRating}` },
+			{ message: `Success. Updated product ${json.data.product.id} rating to ${avgRating}` },
 			{ status: 201 },
 		);
 	}
