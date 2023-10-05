@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { revalidateTag } from "next/cache";
 import { ProductUpdateRatingDocument, ReviewGetByProductIdDocument } from "@/gql/graphql";
 import { executeGraphql } from "@/utils";
 
@@ -37,6 +38,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 				rating: avgRating,
 			},
 		});
+
+		revalidateTag("product");
 
 		return NextResponse.json(
 			{ message: `Success. Updated product ${json.data.product.id} rating to ${avgRating}` },

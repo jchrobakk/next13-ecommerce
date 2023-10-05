@@ -14,11 +14,11 @@ const productsPerPage = 4;
 
 export const getProductsList = async () => {
 	const graphqlResponse = await executeGraphql({
+		next: {
+			tags: ["product"],
+		},
 		query: ProductsGetListDocument,
 		variables: {},
-		next: {
-			revalidate: 15,
-		},
 	});
 
 	return graphqlResponse.products;
@@ -26,6 +26,9 @@ export const getProductsList = async () => {
 
 export const getProduct = async (id: string) => {
 	const graphqlResponse = await executeGraphql({
+		next: {
+			tags: ["product"],
+		},
 		query: ProductGetByIdDocument,
 		variables: {
 			id,
@@ -42,14 +45,14 @@ export const getProductsByPage = async (
 	const offset = (page - 1) * productsPerPage;
 
 	const graphqlResponse = await executeGraphql({
+		next: {
+			tags: ["product"],
+		},
 		query: ProductGetByPageDocument,
 		variables: {
 			skip: offset,
 			first: productsPerPage,
 			orderBy: orderBy,
-		},
-		next: {
-			revalidate: 15,
 		},
 	});
 
@@ -59,6 +62,9 @@ export const getProductsByPage = async (
 export const getProductsByCategorySlug = async (category: string, page: number) => {
 	const offset = (page - 1) * productsPerPage;
 	const graphqlResponse = await executeGraphql({
+		next: {
+			tags: ["product"],
+		},
 		query: ProductsGetByCategorySlugDocument,
 		variables: {
 			slug: category,
@@ -73,6 +79,9 @@ export const getProductsByCategorySlug = async (category: string, page: number) 
 export const getProductsByCollectionSlug = async (collection: string, page: number) => {
 	const offset = (page - 1) * productsPerPage;
 	const graphqlResponse = await executeGraphql({
+		next: {
+			tags: ["product"],
+		},
 		query: ProductsGetByCollectionSlugDocument,
 		variables: {
 			slug: collection,
@@ -86,6 +95,9 @@ export const getProductsByCollectionSlug = async (collection: string, page: numb
 
 export const getColorSizeVariantsByProductId = async (id: string) => {
 	const graphqlResponse = await executeGraphql({
+		next: {
+			tags: ["product"],
+		},
 		query: ProductGetColorSizeVariantsByIdDocument,
 		variables: {
 			id,
@@ -97,6 +109,9 @@ export const getColorSizeVariantsByProductId = async (id: string) => {
 
 export const getProductsListByName = async (name: string) => {
 	const graphqlResponse = await executeGraphql({
+		next: {
+			tags: ["product"],
+		},
 		query: ProductGetByNameDocument,
 		variables: {
 			name,
