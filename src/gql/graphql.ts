@@ -10857,6 +10857,7 @@ export type ProductGetByNameQuery = { products: Array<{ id: string, name: string
 export type ProductGetByPageQueryVariables = Exact<{
   skip: Scalars['Int']['input'];
   first: Scalars['Int']['input'];
+  orderBy?: InputMaybe<ProductOrderByInput>;
 }>;
 
 
@@ -11174,8 +11175,8 @@ export const ProductGetByNameDocument = new TypedDocumentString(`
   price
 }`) as unknown as TypedDocumentString<ProductGetByNameQuery, ProductGetByNameQueryVariables>;
 export const ProductGetByPageDocument = new TypedDocumentString(`
-    query ProductGetByPage($skip: Int!, $first: Int!) {
-  products(skip: $skip, first: $first) {
+    query ProductGetByPage($skip: Int!, $first: Int!, $orderBy: ProductOrderByInput) {
+  products(skip: $skip, first: $first, orderBy: $orderBy) {
     ...Product
   }
 }

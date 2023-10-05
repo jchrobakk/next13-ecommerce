@@ -6,6 +6,7 @@ import {
 	ProductsGetByCollectionSlugDocument,
 	ProductGetColorSizeVariantsByIdDocument,
 	ProductGetByNameDocument,
+	type ProductOrderByInput,
 } from "@/gql/graphql";
 import { executeGraphql } from "@/utils";
 
@@ -34,7 +35,10 @@ export const getProduct = async (id: string) => {
 	return graphqlResponse.product;
 };
 
-export const getProductsByPage = async (page: number) => {
+export const getProductsByPage = async (
+	page: number,
+	orderBy = "name_ASC" as ProductOrderByInput,
+) => {
 	const offset = (page - 1) * productsPerPage;
 
 	const graphqlResponse = await executeGraphql({
@@ -42,6 +46,7 @@ export const getProductsByPage = async (page: number) => {
 		variables: {
 			skip: offset,
 			first: productsPerPage,
+			orderBy: orderBy,
 		},
 		next: {
 			revalidate: 15,

@@ -1,5 +1,5 @@
-query ProductGetByPage($skip: Int!, $first: Int!) {
-	products(skip: $skip, first: $first) {
+query ProductGetByPage($skip: Int!, $first: Int!, $orderBy: ProductOrderByInput) {
+	products(skip: $skip, first: $first, orderBy: $orderBy) {
 		...Product
 	}
 }
