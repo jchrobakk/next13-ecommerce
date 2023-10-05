@@ -40,9 +40,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 		});
 
 		revalidateTag("product");
-		revalidatePath("/products");
-		revalidatePath(`/products/${json.data.product.id}`);
-		revalidatePath(`/products/[pageNumber]`);
+		revalidatePath("/products", "page");
+		revalidatePath(`/products/${json.data.product.id}`, "page");
+		revalidatePath(`/products/[pageNumber]`, "page");
 
 		return NextResponse.json(
 			{ message: `Success. Updated product ${json.data.product.id} rating to ${avgRating}` },
