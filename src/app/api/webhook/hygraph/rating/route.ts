@@ -24,7 +24,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 		let avgRating = reviews.reduce((acc, cur) => acc + cur.rating, 0) / reviews.length;
 
 		if (isNaN(avgRating)) {
-			avgRating = 0;
+			avgRating = 1;
 		}
 
 		await executeGraphql({
