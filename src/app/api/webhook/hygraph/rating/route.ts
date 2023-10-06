@@ -39,6 +39,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 			},
 		});
 
+		// TODO: remove unnecessary revalidations
+
 		revalidateTag("product");
 		revalidatePath("/products", "page");
 		revalidatePath(`/products/${json.data.product.id}`, "page");
